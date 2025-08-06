@@ -6,8 +6,8 @@ function adicionar() {
    
 
     if (isNaN(quantidade) || quantidade <=0) {
-        quantidade = 1
-        document.getElementById("quantidade").value = 1
+       alert("Selecione uma quantidade válida!");
+       return;
     }
 
     let valorInicial = parseInt(document.getElementById("valor-total").textContent.split("R$")[1]);
@@ -32,3 +32,4 @@ function limpar() {
     document.getElementById("lista-produtos").innerHTML = ""
 
 }
+
