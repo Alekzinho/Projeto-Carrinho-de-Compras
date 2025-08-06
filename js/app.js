@@ -1,36 +1,34 @@
 function adicionar() {
-    let quantidade = parseInt(document.getElementById("quantidade").value);
-    
-    if (isNaN(quantidade) || quantidade <= 0) {
-        alert("Insira uma quantidade válida.");
-        return;
-    }
-
+    let quantidade = parseInt(document.getElementById("quantidade").value.trim());
     let produto = document.getElementById("produto").value;
-    let nomeProduto = produto.split("-")[0];
-
-    if (!produto || produto.trim() === "") {
-        alert("Selecione um produto válido.");
-        return;
-    }
-    
-    let valor = parseInt(document.getElementById("valor-total").innerHTML.split("R$")[1]);
+    let nomeProduto = produto.split("-", 1);
     let valorProduto = parseInt(produto.split("R$")[1]);
-    let valorTotalProduto = quantidade * valorProduto;
-    
-    let carrinho = document.getElementById("lista-produtos");
-    carrinho.innerHTML = carrinho.innerHTML + `<section class="carrinho__produtos" id="lista-produtos">
-    <section class="carrinho__produtos__produto">
-      <span class="texto-azul">${quantidade}x</span> ${nomeProduto} <span class="texto-azul">R$${valorTotalProduto}</span>
-    </section>`;
-    
-    let valorFinal = valor + valorTotalProduto;
-    let resultadoFinal = document.getElementById("valor-total").innerHTML = `R$${valorFinal}`; 
+   
 
-    document.getElementById("quantidade").value = "";
+    if (isNaN(quantidade) || quantidade <=0) {
+        quantidade = 1
+        document.getElementById("quantidade").value = 1
+    }
+
+    let valorInicial = parseInt(document.getElementById("valor-total").textContent.split("R$")[1]);
+
+    listaCarrinhodeCompras(quantidade,nomeProduto,valorProduto, valorInicial)
+    
+}
+
+function listaCarrinhodeCompras(quantia, nome, preco, precoInicial) {
+    let valorTotal = quantia * preco;
+    let listaDeProdutos = document.getElementById("lista-produtos");
+    listaDeProdutos.appendChild(document.createElement("section")).innerHTML = `<section class="carrinho__produtos__produto"> <span class="texto-azul">${quantia}x</span> ${nome} <span class="texto-azul">R$${preco}</span></section>`
+
+    let totalDoCarrinho = document.getElementById("valor-total");
+    totalDoCarrinho.innerHTML = `R$${precoInicial + valorTotal}`
+
 }
 
 function limpar() {
-    document.getElementById("lista-produtos").innerHTML = "";
+    document.getElementById("quantidade").value = "";
     document.getElementById("valor-total").innerHTML = "R$0";
+    document.getElementById("lista-produtos").innerHTML = ""
+
 }
