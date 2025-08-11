@@ -13,3 +13,6 @@ let numero2 = 55;
 let resultado = numero1 + numero2;
 
 console.log(`Você sabia que a soma de ${numero1} com ${numero2} é igual a ${resultado}?`);
+
+let duasSentenca = "Eu gosto de gato; Eu gosto de cachorro";
+console.log(duasSentenca.split(";"));
